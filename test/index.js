@@ -1,15 +1,61 @@
-var dothis = require( './..' );
+var dothis = require( './..' ),
+	test = require( 'tape' );
 
-dothis( onFinish )
-.in( 1000 )
-.update( onUpdate );
+test( 'testing in', function( t ) {
 
-function onFinish( offBy, percentage ) {
+	var testDuration = 100,
+		didUpdate = false,
+		startTime = Date.now();
 
-	console.log( 'FINISHED', offBy, percentage );
-}
+	t.plan( 5 );
 
-function onUpdate( offBy, percentage ) {
+	dothis( function( offBy, percentage ) {
 
-	console.log( 'UPDATE', offBy, percentage );	
-}
+		var duration = Date.now() - startTime;
+
+		t.ok( offBy >= 0, 'offBy is not negative: ' + offBy );
+		t.ok( percentage == 1, 'percentage is 1: ' + percentage );
+		t.ok( duration >= testDuration && duration - testDuration < 33, 'Took an appropriate amount of time: ' +  duration );
+	})
+	.in( testDuration )
+	.update( function( offBy, percentage ) {
+
+		if( !didUpdate ) {
+
+			didUpdate = true;
+
+			t.ok( offBy < 0, 'offBy is negative: ' + offBy );
+			t.ok( typeof percentage == 'number', 'we have a percentage value: ' + percentage );
+		}
+	});
+});
+
+
+test( 'testing at', function( t ) {
+
+	var testDuration = 100,
+		didUpdate = false,
+		startTime = Date.now();
+
+	t.plan( 5 );
+
+	dothis( function( offBy, percentage ) {
+
+		var duration = Date.now() - startTime;
+
+		t.ok( offBy >= 0, 'offBy is not negative: ' + offBy );
+		t.ok( percentage == 1, 'percentage is 1: ' + percentage );
+		t.ok( duration >= testDuration && duration - testDuration < 33, 'Took an appropriate amount of time: ' +  duration );
+	})
+	.at( new Date( Date.now() + testDuration ) )
+	.update( function( offBy, percentage ) {
+
+		if( !didUpdate ) {
+
+			didUpdate = true;
+
+			t.ok( offBy < 0, 'offBy is negative: ' + offBy );
+			t.ok( typeof percentage == 'number', 'we have a percentage value: ' + percentage );
+		}
+	});
+});

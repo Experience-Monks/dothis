@@ -98,7 +98,7 @@ function dothis( cb ) {
 			if( !current )
 				current = new Date();
 
-			return this.inMillis( date.getTime() - current.getTime() );
+			return this.in( date.getTime() - current.getTime() );
 		}
 	};
 }
