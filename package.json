@@ -1,0 +1,33 @@
+{
+  "name": "dothis",
+  "version": "1.0.0",
+  "description": "Call a function after a certain set of time or on a specific Date.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Jam3/dothis.git"
+  },
+  "keywords": [
+    "settimeout",
+    "event",
+    "date",
+    "milliseconds",
+    "seconds",
+    "minutes",
+    "hours",
+    "minutes",
+    "days"
+  ],
+  "author": "Mikko Haapoja <me@mikkoh.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jam3/dothis/issues"
+  },
+  "homepage": "https://github.com/Jam3/dothis",
+  "dependencies": {
+    "raf": "^2.0.4"
+  }
+}
